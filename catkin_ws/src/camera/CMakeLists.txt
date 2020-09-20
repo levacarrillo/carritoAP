@@ -8,7 +8,6 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
 )
 
-
 find_package(raspicam REQUIRED)
 find_package(OpenCV REQUIRED)
 

@@ -1,8 +1,0 @@
-prefix=/home/pi/catkin_ws/install
-
-Name: timestamp_tools
-Description: Description of timestamp_tools
-Version: 1.6.8
-Cflags: -I/home/pi/catkin_ws/install/include
-Libs: -L/home/pi/catkin_ws/install/lib 
-Requires: roslib roscpp
