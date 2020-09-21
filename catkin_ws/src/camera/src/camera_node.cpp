@@ -55,6 +55,9 @@ int main(int argc, char** argv) {
 
 	camera.retrieve(image);
 
+        cv::flip(image, image, 0);
+        cv::flip(image, image, 1);
+
 	msgImage.header.stamp = ros::Time::now();
 	memcpy(msgImage.data.data(), image.data, img_width*img_height*3);
 	cv::imencode(".jpg", image, msgCompressed.data, compressionParams); 
