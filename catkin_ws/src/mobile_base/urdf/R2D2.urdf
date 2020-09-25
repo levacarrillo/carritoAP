@@ -243,4 +243,16 @@
     <child link="box"/>
     <origin xyz="0.1814 0 0.1414"/>
   </joint>
+
+  <link name="laser_link"/>
+
+  <joint name="laser_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="laser_link"/>
+
+    <origin xyz="0.06323 0 0.04" rpy="0 0 0"/>
+    <axis xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+
 </robot>
