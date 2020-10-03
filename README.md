@@ -1,5 +1,7 @@
 # Software for carritoAP
 
+![](https://github.com/levacarrillo/carritoAP/blob/master/carritoAP.PNG)
+
 ### Compilation
 ```
  cd ~/carritoAP/catkin_ws
@@ -12,4 +14,3 @@
  roslaunch surge_et_ambula carritoAP.launch 
  roslaunch surge_et_ambula carritoAP_simul.launch 
 ```
-![Robot photo](https://github.com/levacarrillo/carritoAP/carritoAP.PNG)
