@@ -2,7 +2,7 @@
 
 ![](https://github.com/levacarrillo/carritoAP/blob/master/carritoAP.PNG)
 
-###Use the branch master to work with personal computer:
+###Use the branch master to work with Ubuntu desktop:
 ```
  git checkout master
 ```
