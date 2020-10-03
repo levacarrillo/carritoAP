@@ -2,6 +2,14 @@
 
 ![](https://github.com/levacarrillo/carritoAP/blob/master/carritoAP.PNG)
 
+###Use the branch master to work with personal computer:
+```
+ git checkout master
+```
+###If you want to compile it in raspberry change to raspberry:
+```
+ git checkout raspberry
+```
 ### Compilation
 ```
  cd ~/carritoAP/catkin_ws
