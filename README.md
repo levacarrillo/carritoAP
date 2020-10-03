@@ -12,4 +12,4 @@
  roslaunch surge_et_ambula carritoAP.launch 
  roslaunch surge_et_ambula carritoAP_simul.launch 
 ```
-![alt text](http://github.com/levacarrillo/carritoAP/carritoAP.png)
+![Robot photo](http://github.com/levacarrillo/carritoAP/carritoAP.PNG)
