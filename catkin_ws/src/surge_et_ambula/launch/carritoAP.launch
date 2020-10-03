@@ -1,6 +1,6 @@
 <launch>
 
-	<param name="robot_description" command="cat $(find mobile_base)/urdf/carritoAP.urdf"/>
+	<param name="robot_description" command="cat $(find rob2w_description)/src/urdf/carritoAP.urdf"/>
         <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
 
 	<node name="camera_node"  type="camera_node"  pkg="camera"/>
