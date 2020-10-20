@@ -6,31 +6,27 @@
 
 using namespace std;
 
-
-float light_sensor[4];
+float light_sensor[8];
 
 void light_callback(const std_msgs::Int16MultiArrayConstPtr& msg) {
 
-    cout << " [" << msg->data[0] << ", " << msg->data[1] << ", " << msg->data[2] << ", " << msg->data[3] << "] " << endl;
+    cout << " [" << msg->data[0] << ", " << 
+					msg->data[1] << ", " << 
+					msg->data[2] << ", " << 
+					msg->data[3] << " ," << 
+					msg->data[4] << ", " << 
+					msg->data[5] << " ," << 
+					msg->data[6] << ", " << 
+					msg->data[7] << " ," << 
+					"] " << endl;
     
-    for(int i=0; i<4; i++) 
-	light_sensor[i] = msg->data[i];
+    for(int i=0; i<8; i++)  light_sensor[i] = msg->data[i];
 }
 
 bool get_intensities(light_sensors::simulator_light::Request &req, light_sensors::simulator_light::Response &res) {
 
-    //Ghost sensor
-    res.values[0] = (light_sensor[0] + light_sensor[3]) / 2;
-
-    for(int i=1; i<5; i++) { 
-
-	res.values[i*2-1] = light_sensor[i-1];
-
-	if(i<4)
-	    res.values[i*2] = (light_sensor[i-1] + light_sensor[i+1]) / 2; //Ghost sensors   
-    
-    }
-
+	for(int i=0; i<5; i++)  res.values[i] = light_sensor[i+3];
+	for(int i=5; i<8; i++)  res.values[i] = light_sensor[i-5];
     
     return true;
 }

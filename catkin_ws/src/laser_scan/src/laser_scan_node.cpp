@@ -1,4 +1,3 @@
-
 #include <ros/ros.h>
 #include <sensor_msgs/LaserScan.h>
 #include <tf/transform_listener.h>
@@ -7,14 +6,22 @@
 
 using namespace std;
 
-double  left_sharp_distance;
-double right_sharp_distance;
+
+double sharp_distance[8];
 
 void sharp_callback(const std_msgs::Int16MultiArray::ConstPtr& msg) {
 
-	left_sharp_distance  = 9.609  * pow(msg->data[0], -0.832);
-	right_sharp_distance = 19.327 * pow(msg->data[1], -0.958); 
+	//left_sharp_distance  = 9.609  * pow(msg->data[0], -0.832);
+	//right_sharp_distance = 19.327 * pow(msg->data[1], -0.958); 
     //cout << "left_sharp_distance: " << left_sharp_distance << "\tright_sharp_distance: " << right_sharp_distance << endl;
+
+	for(int i=0; i<8; i++) {
+
+		sharp_distance[i] = 9.609  * pow(msg->data[i], -0.832) + 0.08;
+		if(sharp_distance[i] > 0.7) sharp_distance[i] = 0.7;		
+	}
+
+	//for(int i=0; i<8; i++)  sharp_distance[i] = 9.609  * pow(500, -0.832);
 }
 
 int main(int argc, char** argv){
@@ -27,7 +34,7 @@ int main(int argc, char** argv){
 	ros::Publisher  scan_pub = n.advertise<sensor_msgs::LaserScan>("/scan", 50);
 	ros::Subscriber laser_sub = n.subscribe("/sharp_sensors", 100, sharp_callback); 
 
-	unsigned int num_readings = 2;
+	unsigned int num_readings = 8;
 	double laser_frequency = 40;
 	double ranges[num_readings];
 	double intensities[num_readings];
@@ -54,30 +61,20 @@ int main(int argc, char** argv){
 			ros::Duration(1.0).sleep();
 		}
 
-		ranges[0] = right_sharp_distance;
-		ranges[1] =  left_sharp_distance;
-
-		intensities[0] = 100;
-		intensities[1] = 100;
-
-		float right_theta = atan(0.04 / right_sharp_distance);
-		float left_theta  = atan(0.04 /  left_sharp_distance);
-
-		float right_beam = sqrt(pow(0.04, 2) + pow(right_sharp_distance, 2));
-		float  left_beam = sqrt(pow(0.04, 2) + pow(left_sharp_distance , 2)); 
-
-		ranges[0] = right_beam;
-		ranges[1] =  left_beam;
+		for(int i=0; i<8; i++) {
+			ranges[i] = sharp_distance[i];
+			intensities[i] = 100;
+		}
 
 		ros::Time scan_time = ros::Time::now();
 
 		sensor_msgs::LaserScan scan;
 		scan.header.stamp = scan_time;
 		scan.header.frame_id = "laser_link";
-		scan.angle_min = - right_theta;
-		scan.angle_max =    left_theta;
+		scan.angle_min = - 2.35619;
+		scan.angle_max =    3.1416;
 
-		scan.angle_increment = right_theta + left_theta;
+		scan.angle_increment = 0.785398;
 		scan.time_increment = (1 / laser_frequency) / (num_readings);
 		scan.range_min = 0.0;
 		scan.range_max = 100.0;
