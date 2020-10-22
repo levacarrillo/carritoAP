@@ -12,9 +12,5 @@
 
         <node name="mobile_base_node"  type="mobile_base_node"    pkg="mobile_base"  />
 	<node name="laser_scan_node"   type="laser_scan_node"     pkg="laser_scan"   />
-	<node name="light_sensors_node" type="light_sensors_node"  pkg="light_sensors"/>
-
-
-        <!--node name="simple_move_node" type="simple_move_node" pkg="simple_move" output="screen"/-->
 
 </launch>
